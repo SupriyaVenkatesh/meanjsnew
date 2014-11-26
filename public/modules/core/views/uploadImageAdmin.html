@@ -1,0 +1,115 @@
+<div data-ng-controller="OrganizationsController" class="container-fluid" style="width:119%;margin-left:-10%;margin-top:1%"  >
+   <br></br>
+	<div class="row" style="width:86%;float:right;">
+			<div id="breadcrumb" class="col-xs-12">
+				<a href="#" class="show-sidebar">
+					
+				</a>
+				<ol class="breadcrumb pull-left">
+					<li><a href="/#!/superadminindexpage">Home</a></li>
+					<li><a href="/#!/uploadimage">Upload Logo</a></li>
+				</ol>
+			</div>
+		</div>
+	<div class="row" style="min-height:100%;">
+		<div id="sidebar-left" class="col-xs-2 col-sm-2">
+			<ul class="nav main-menu">
+			<li>
+			<a class="ajax-link" href="/#!/adminindexpage">
+						 <span class="hidden-xs">Home</span>
+					 </a>
+				</li>
+			<li class="dropdown">
+					<a href="#" class="dropdown-toggle">
+						<i class="fa fa-bar-chart-o"></i>
+						<span class="hidden-xs">Manage</span>
+					</a>
+					<ul class="dropdown-menu">
+				<li>
+					 <a class="ajax-link" href="/#!/adminCreateUser">
+						 <span class="hidden-xs">Create User</span>
+					 </a>
+				</li>
+				<li>
+					 <a class="ajax-link" href="/#!/uploadImageAdmin">
+						 <span class="hidden-xs">Upload Logo</span>
+					 </a>
+				</li>
+				<li>
+					 <a class="ajax-link" href="/#!/accountDetailPage">
+						 <span class="hidden-xs">Accounts</span>
+					 </a>
+				</li>
+				<li>
+					 <a class="ajax-link" href="/#!/contactDetailPage">
+						 
+						 <span class="hidden-xs">Contacts</span>
+					</a>
+				</li>
+				</ul>
+				</li>
+			</ul> 
+	  </div>
+	  <!--Start Content-->
+	  <div id="content" class="col-xs-12 col-sm-10" style="float:right;">
+		<div class="preloader">
+	  	<section>
+    <div class="page-header">
+        <h1>Upload your company Logo</h1>
+    </div>
+    <div class="col-md-4">
+		<div class="col-md-14">	
+		<form ng-submit="updateSth()" name="uploadForm" enctype="multipart/form-data">
+		 <div class="form-group"  >
+					<label>Company Name</label><br>
+				<div class="col-sm-6">
+						<input type="text" data-ng-model="orgImage.name" id="cname"  name="cname" class="form-control" data-placement="bottom" >
+				</div>
+		</div>
+		<br/>
+		  <div class="form-group">
+                <label>Select a File to Upload</label><br />
+                    <div class="controls">
+                       <input name="file" type="file"  file="file"  />
+                    </div>
+         </div>
+		  <span style="color:blue" ng-show="file.name.length > 0">File name : {{file.name}}</span><br>
+		  <span style="color:blue" ng-show="file.name.length > 0">File type : {{file.type}} </span>
+		   <br/><b>Preview:</b><br />
+		   <i ng-hide="imageSrc">No Image selected</i>
+		   <img ng-src="{{imageSrc}}" /><br/>
+		  <div ng-show="!dropSupported">HTML5 Drop File is not supported on this browser</div>
+		 <div ng-show="dropSupported" class="drop-box" ng-file-drop="onDropSelect($files);"
+            ng-file-drop-available="dropSupported=true"> or drop files here
+         </div>
+		 <span style="color:blue" ng-show="selectedFiles.name.length > 0">File name : {{selectedFiles.name}}</span><br>
+		 <span style="color:blue" ng-show="selectedFiles.name.length > 0">File size : {{selectedFiles.size}} KB</span>
+		 <div ng-show="file.name.length > 0">
+				<div ng-show="progressVisible">
+					<div class="percent">uploading percentage : {{progress}}%</div>
+					<div class="progress-bar progress-bar-warning"  role="progressbar" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100" ng-style="{width : ( progress + '%' ) }" >
+						 <span class="sr-only">{{progress}}% Complete (warning)</span>
+					</div>
+				</div>
+		</div>
+			<div class="clearfix"></div>
+		<div class="form-group">
+					<div class="col-sm-offset-0 col-sm-0">
+							<button  name="somethingINeed" type="submit" value="Upload" class="btn btn-primary btn-label-left">
+							Upload
+							</button>
+					</div>
+		</div>
+			<!--input name="somethingINeed" type="submit" value="Upload" /-->
+		</form> 	
+	
+	</div>		
+ </div>
+</section>
+</div>
+</div>
+	  
+	<!--End Content -->
+	</div>
+</div>
+
