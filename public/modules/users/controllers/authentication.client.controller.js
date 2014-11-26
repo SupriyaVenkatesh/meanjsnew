@@ -111,7 +111,7 @@ app.controller('AuthenticationController',['$scope', '$http', '$window','$locati
 		
 		$scope.signupforUser = function() 
 		{
-		  var sample = [];
+		 var sample = [];
 	      $scope.credentials.role = $scope.credentials.newrole._id;
 		  $scope.credentials.orgId = $scope.credentials.company._id;
 		  $scope.credentials.displayName = $scope.credentials.firstName + $scope.credentials.lastName;

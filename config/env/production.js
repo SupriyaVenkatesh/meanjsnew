@@ -31,15 +31,15 @@ module.exports = {
 		},
 		css: 'public/dist/application.min.css',
 		js: [
-		    'public/config.js',
-			'public/application.js',
-			'public/modules/*/*.js',
-			'public/modules/*/*[!tests]*/*.js'
-			
+		    
+			'public/dist/application.min.js'
 		],
 		overrides: [
-			'public/modules/**/css/overrides/*.css'
+			'public/modules/**/css/overrides/*.css',
+			'public/modules/**/css/overrides/*.js'
+			
 		],
+		
 		tests: [
 		'public/lib/angular-mocks/angular-mocks.js',
 		'public/modules/*/tests/*.js'
