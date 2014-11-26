@@ -35,8 +35,7 @@ module.exports = {
 			'public/dist/application.min.js'
 		],
 		overrides: [
-			'public/modules/**/css/overrides/*.css',
-			'public/modules/**/css/overrides/*.js'
+			'public/modules/**/css/overrides/*.css'
 			
 		],
 		
