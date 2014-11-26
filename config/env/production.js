@@ -2,7 +2,7 @@
 
 module.exports = {
 
-	db:'mongodb://supriyav:abcabc1234@dogen.mongohq.com:10072/app31971377',
+	db:'mongodb://invoiceit:abcabc1234@dogen.mongohq.com:10072/app31971599',
 	assets: {
 		lib: {
 			css: [
@@ -31,7 +31,11 @@ module.exports = {
 		},
 		css: 'public/dist/application.min.css',
 		js: [
-			'public/dist/application.min.js'
+		    'public/config.js',
+			'public/application.js',
+			'public/modules/*/*.js',
+			'public/modules/*/*[!tests]*/*.js'
+			
 		],
 		overrides: [
 			'public/modules/**/css/overrides/*.css'

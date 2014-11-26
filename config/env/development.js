@@ -1,7 +1,8 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://supriyav:abcabc1234@dogen.mongohq.com:10072/app31971377',
+
+	db: 'mongodb://invoiceit:abcabc1234@dogen.mongohq.com:10072/app31971599',
 	app: {
 		title: 'InoviceIt - Development Environment'
 	},
