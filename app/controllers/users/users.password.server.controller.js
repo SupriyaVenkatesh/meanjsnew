@@ -17,11 +17,7 @@ var _ = require('lodash'),
  * Forgot for reset password (forgot POST)
  */
 exports.forgot = function(req, res, next) {
-var username=req.body[0].username;
-var toaddress=req.body[0].toaddress;
-console.log(username);
-console.log(toaddress);	    
-async.waterfall([
+	async.waterfall([
 		// Generate random token
 		function(done) {
 			crypto.randomBytes(20, function(err, buffer) {
@@ -31,11 +27,9 @@ async.waterfall([
 		},
 		// Lookup user by username
 		function(token, done) {
-			
-
-			//if (req.body[0].username != '') {
+			if (req.body.username) {
 				User.findOne({
-					username: username
+					username: req.body.username
 				}, '-salt -password', function(err, user) {
 					if (!user) {
 						return res.status(400).send({
@@ -54,11 +48,11 @@ async.waterfall([
 						});
 					}
 				});
-			//} else {
-				//return res.status(400).send({
-				//	message: 'Username field must not be blank'
-				//});
-			//}
+			} else {
+				return res.status(400).send({
+					message: 'Username field must not be blank'
+				});
+			}
 		},
 		function(token, user, done) {
 			res.render('templates/reset-password-email', {
@@ -71,10 +65,9 @@ async.waterfall([
 		},
 		// If valid email, send reset email using service
 		function(emailHTML, user, done) {
-			//console.log(req.body[0].toaddress);
-			var smtpTransport = nodemailer.createTransport();
+			var smtpTransport = nodemailer.createTransport(config.mailer.options);
 			var mailOptions = {
-				to: req.body[0].toaddress,
+				to: user.email,
 				from: config.mailer.from,
 				subject: 'Password Reset',
 				html: emailHTML
@@ -94,8 +87,10 @@ async.waterfall([
 	});
 };
 
-
 exports.sendmailnewuser = function(req, res, next) {
+console.log("test----",req.body[0]);
+console.log(req.body[0].username);
+console.log(req.body[0].toaddress);
 var username=req.body[0].username;
 var toaddress=req.body[0].toaddress;
 console.log(username);

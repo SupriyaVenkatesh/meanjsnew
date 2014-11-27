@@ -1,7 +1,7 @@
 'use strict';
 
-var app=angular.module('users', [] );
-app.controller('AuthenticationController',['$scope', '$http', '$window','$location', 'Authentication','sharedProperties','Users','$stateParams','licenseProperties','rolesProperties',
+
+angular.module('users').controller('AuthenticationController',['$scope', '$http', '$window','$location', 'Authentication','sharedProperties','Users','$stateParams','licenseProperties','rolesProperties',
 	function($scope, $http, $window, $location, Authentication,sharedProperties,Users,$stateParams,licenseProperties,rolesProperties)
 	 {
 		$scope.authentication = Authentication;
@@ -10,7 +10,7 @@ app.controller('AuthenticationController',['$scope', '$http', '$window','$locati
 		$scope.GlobalUsers = Users.query();
 	    $scope.GlobalOrganizations = sharedProperties.orgLength();
 		$scope.mySelections = [];
-        //Load list of Users
+        $scope.sample = [];
 		$scope.find = function() {
 		$scope.OnlyAdmnUsers = Users.get({ 
 				userorgId: $scope.authentication.user.orgId
@@ -111,30 +111,28 @@ app.controller('AuthenticationController',['$scope', '$http', '$window','$locati
 		
 		$scope.signupforUser = function() 
 		{
-		 var sample = [];
 	      $scope.credentials.role = $scope.credentials.newrole._id;
 		  $scope.credentials.orgId = $scope.credentials.company._id;
 		  $scope.credentials.displayName = $scope.credentials.firstName + $scope.credentials.lastName;
 		  $scope.credentials.username = $scope.credentials.firstName + $scope.credentials.lastName;
 		  $scope.credentials.password = $scope.credentials.firstName + $scope.credentials.lastName;
-		  $scope.credentials.org=[{name: $scope.credentials.company.name, id: $scope.credentials.company._id}]
-		  var username=$scope.credentials.username;
-          var toaddress=$scope.credentials.email;
-		  sample.push({ username,toaddress});
+		  //$scope.credentials.org=[{name: $scope.credentials.company.name, id: $scope.credentials.company._id}]
+		 $scope.sample.push({
+		 	username: $scope.credentials.username,toaddress:$scope.credentials.email});
+		  //$scope.sample.push({$scope.username,$scope.toaddress});
+		  console.log("sample-->"+$scope.sample);
 		  $http.post('/auth/signup', $scope.credentials).success(function(response) {
 					$scope.onlyUsers = Users.query();
-					$http.post('/auth/sendmailnewuser',sample).success(function(response) {
-						       	
-				    }).error(function(response){
+					
+					$http.post('/auth/sendmailnewuser',$scope.sample).success(function(response) {
+			     }).error(function(response){
 					    		
 				    });
-					$scope.credentials ='';	
+				$scope.credentials ='';		
 				}).error(function(response) {
 					$scope.error = response.message;
 			}); 
-			
-			
-		} ;
+				} ;
 
 		$scope.assingValue = function(value) {
 			$scope.credentials.orgId = value;
