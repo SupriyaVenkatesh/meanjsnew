@@ -94,7 +94,7 @@
 										
 					                    <label class="col-sm-2 control-label">Role</label>
 										<div class="col-sm-4">
-					                         <select  data-ng-model="credentials.newrole" ng-options="i.name for i in allRoles"  ng-disabled="i.name=='superAdmin'"  value="{{$index}}">
+					                         <select  data-ng-model="credentials.newrole" ng-options="i.name for i in allRoles | filter: {name: '!admin'}"  >
 					                           <option value="">--Select--</option>
 					                              </select>
 					                           <input type="hidden" id="role" name="role" class="form-control"  value="credentials.newrole._id" >

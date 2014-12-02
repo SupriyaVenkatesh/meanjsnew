@@ -1,8 +1,27 @@
 'use strict';
 
 
-angular.module('users').controller('AuthenticationController',['$scope', '$http', '$window','$location', 'Authentication','sharedProperties','Users','$stateParams','licenseProperties','rolesProperties','Organizations',
-	function($scope, $http, $window, $location, Authentication,sharedProperties,Users,$stateParams,licenseProperties,rolesProperties,Organizations)
+var app=angular.module('users');
+
+app.filter('selectFromSelected', function () {
+		return function (incItems, value) {
+		var out = [{}];
+		console.log('value',value);
+		if(value){
+		for(x=0; x<incItems.length; x++){
+		if(incItems[x].Value == value)
+		out.push(incItems[x]);
+		}
+		return out;
+		}
+		else if(!value){
+		return incItems
+		}
+		};
+});
+
+app.controller('AuthenticationController',['$scope','$filter', '$http', '$window','$location', 'Authentication','sharedProperties','Users','$stateParams','licenseProperties','rolesProperties','Organizations',
+	function($scope, $filter,$http, $window, $location, Authentication,sharedProperties,Users,$stateParams,licenseProperties,rolesProperties,Organizations)
 	 {
 		$scope.authentication = Authentication;
 		$scope.GlobalRoles = rolesProperties.all();
@@ -118,7 +137,7 @@ angular.module('users').controller('AuthenticationController',['$scope', '$http'
 		$scope.signupforUser = function() 
 		{
 	      $scope.credentials.role = $scope.credentials.newrole._id;
-		  $scope.credentials.orgId = $scope.credentials.company._id;
+		  $scope.credentials.orgId = $scope.Admincompany._id;
 		  $scope.credentials.displayName = $scope.credentials.firstName + $scope.credentials.lastName;
 		  $scope.credentials.username = $scope.credentials.firstName + $scope.credentials.lastName;
 		  $scope.credentials.password = $scope.credentials.firstName + $scope.credentials.lastName;
