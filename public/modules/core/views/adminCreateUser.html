@@ -75,10 +75,7 @@
 								<div class="form-group">
 								        <label for="company" class="col-sm-2 control-label">Company</label>
 										<div class="col-sm-4">
-											<select  data-ng-model="credentials.company" id="Company" ng-options="i.name for i in allCompanies" class="form-control" placeholder="Company name"  data-placement="bottom" >
-												<option value="">--Select--</option>
-											<!--<input type="hidden" data-ng-model="credentials.CompanyName._id" id="nameid" name="nameid" class="form-control"  value="credentials.CompanyName._id" >-->
-											</select>
+											<input type="text" data-ng-model="Admincompany.name" id="cname"  name="cname" class="form-control" data-placement="bottom" >
 												
 										</div>
 								    <label class="col-sm-2 control-label">First name</label>
@@ -97,7 +94,7 @@
 										
 					                    <label class="col-sm-2 control-label">Role</label>
 										<div class="col-sm-4">
-					                         <select  data-ng-model="credentials.newrole" ng-options="i.name for i in allRoles">
+					                         <select  data-ng-model="credentials.newrole" ng-options="i.name for i in allRoles"  ng-disabled="i.name=='superAdmin'"  value="{{$index}}">
 					                           <option value="">--Select--</option>
 					                              </select>
 					                           <input type="hidden" id="role" name="role" class="form-control"  value="credentials.newrole._id" >

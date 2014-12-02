@@ -1,8 +1,8 @@
 'use strict';
 
 
-angular.module('users').controller('AuthenticationController',['$scope', '$http', '$window','$location', 'Authentication','sharedProperties','Users','$stateParams','licenseProperties','rolesProperties',
-	function($scope, $http, $window, $location, Authentication,sharedProperties,Users,$stateParams,licenseProperties,rolesProperties)
+angular.module('users').controller('AuthenticationController',['$scope', '$http', '$window','$location', 'Authentication','sharedProperties','Users','$stateParams','licenseProperties','rolesProperties','Organizations',
+	function($scope, $http, $window, $location, Authentication,sharedProperties,Users,$stateParams,licenseProperties,rolesProperties,Organizations)
 	 {
 		$scope.authentication = Authentication;
 		$scope.GlobalRoles = rolesProperties.all();
@@ -18,6 +18,12 @@ angular.module('users').controller('AuthenticationController',['$scope', '$http'
 			 console.log(' 	$scope.OnlyAdmnUsers-->', 	$scope.OnlyAdmnUsers); 
 		    $scope.allnames=$scope.Globalname;
 			$scope.allCompanies= $scope.GlobalCompany;
+			$scope.Admincompany = Organizations.get({ 
+                    organizationId: $scope.authentication.user.orgId
+
+           });
+		    console.log('$scope.Admincompany---',$scope.Admincompany)
+
 		
 			$scope.allRoles= $scope.GlobalRoles;
 			$scope.onlyUsers=[];
@@ -146,7 +152,7 @@ angular.module('users').controller('AuthenticationController',['$scope', '$http'
 		};
 
 		
-		
+
 		$scope.findOnebyIdtoEdit = function() {
 			//console.log("$scope.mySelections---->"+$scope.mySelections);
 			//console.log("$scope.mySelections00---->"+$scope.mySelections[0]);
