@@ -8,6 +8,7 @@ angular.module('accounts').controller('AccountsController', ['$scope', '$statePa
 		$scope.myData = [];
 		$scope.myData = Accounts.query();
 		$scope.mySelections = [];
+		$scope.date__C = new Date();
 		$scope.filterOptions = {
 			filterText: "",
 			useExternalFilter: true
@@ -19,7 +20,29 @@ angular.module('accounts').controller('AccountsController', ['$scope', '$statePa
 			pageSize: 250,
 			currentPage: 1
 		};	
-		
+		$scope.disabled = function(date, mode) {
+    return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+  };
+
+  $scope.toggleMin = function() {
+    $scope.minDate = $scope.minDate ? null : new Date();
+  };
+  $scope.toggleMin();
+
+  $scope.open = function($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+
+    $scope.opened = true;
+  };
+
+  $scope.dateOptions = {
+    formatYear: 'yy',
+    startingDay: 1
+  };
+
+  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+  $scope.format = $scope.formats[0];
 		$scope.setPagingData = function(data, page, pageSize){	
 			var pagedData = data.slice((page - 1) * pageSize, page * pageSize);
 			$scope.myData = pagedData;

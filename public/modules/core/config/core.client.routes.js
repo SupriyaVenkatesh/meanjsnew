@@ -20,9 +20,17 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 			url: '/accountDetailPage',
 			templateUrl: 'modules/accounts/views/account-home.html'
 		}).
+		state('accountDetailPagenew', {
+			url: '/accountDetailPagenew',
+			templateUrl: 'modules/accounts/views/account-home-new.html'
+		}).
 		state('contactDetailPage', {
 			url: '/contactDetailPage',
 			templateUrl: 'modules/contacts/views/contact-home.html'
+		}).
+		state('contactDetailPagenew', {
+			url: '/contactDetailPagenew',
+			templateUrl: 'modules/contacts/views/contact-home-new.html'
 		}).
 		state('adminsingupPage', {
 			url: '/adminsingupPage',
