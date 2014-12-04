@@ -82,7 +82,10 @@
 										</div>
 										<label class="col-sm-2 control-label">Date</label>
 										<div class="col-sm-4">
-											<input type="date" data-ng-model="date__C" id="date__C" class="form-control" >
+											<input type="date" datepicker-popup="{{format}}" data-ng-model="date__C" id="date__C" class="form-control is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+										    <span class="input-group-btn">
+												<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar glyphicon-nonescaped "></i></button>
+											  </span>
 										</div>
 									</div>
 									
