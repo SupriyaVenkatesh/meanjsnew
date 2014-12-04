@@ -102,7 +102,7 @@
 				                     <div class="clearfix"></div>
 									<div class="form-group">
 										<div class="col-sm-offset-5 col-sm-1">
-											<button type="submit" class="btn btn-primary btn-label-left">
+											<button type="submit" class="btn btn-primary btn-label-left" onClick="window.location.reload();" >
 												save
 											</button>
 										</div>
@@ -123,6 +123,7 @@
 	
 				<div class="page-header" style="height:100%;">
 					<h1>List of Users</h1>
+					<input class="peopleNameFilter" id="personNameFilter" type="text" ng-model="nameFilter" placeholder="Search " ng-change="filterName()">
 					<div class="gridStyle" ng-grid="gridOptions"  data-ng-click="findOnebyId();">
 						<div style="margin-left:50%;"class="btn btn-primary" data-ng-click="findOnebyIdtoEdit();" >
 							<i class="glyphicon glyphicon-edit"></i>

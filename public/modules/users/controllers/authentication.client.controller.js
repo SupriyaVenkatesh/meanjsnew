@@ -30,35 +30,64 @@ app.controller('AuthenticationController',['$scope','$filter', '$http', '$window
 	    $scope.GlobalOrganizations = sharedProperties.orgLength();
 		$scope.mySelections = [];
         $scope.sample = [];
+		$scope.peruser = [];
+		
 		$scope.find = function() {
-		$scope.OnlyAdmnUsers = Users.get({ 
-				userorgId: $scope.authentication.user.orgId
-			});	
-			 console.log(' 	$scope.OnlyAdmnUsers-->', 	$scope.OnlyAdmnUsers); 
 		    $scope.allnames=$scope.Globalname;
 			$scope.allCompanies= $scope.GlobalCompany;
-			$scope.Admincompany = Organizations.get({ 
-                    organizationId: $scope.authentication.user.orgId
-
-           });
-		    console.log('$scope.Admincompany---',$scope.Admincompany)
-
-		
 			$scope.allRoles= $scope.GlobalRoles;
-			$scope.onlyUsers=[];
-			$scope.onlyUsers = Users.query();
-              console.log(" $scope.onlyUsers11--", $scope.onlyUsers);
-			angular.forEach($scope.users , function(value , key) {
-			      angular.forEach(value, function(value1 , key1) {
-                        if(key1 == 'orgId' && value1 == $scope.authentication.user.orgId){
-						 $scope.onlyUsers.push(value);
-						}
-					});   		
-				}); 
-				console.log(" $scope.onlyUsers22--", $scope.onlyUsers);
+			//$scope.onlyUsers=[];
+			$scope.Admincompany = Organizations.get({
+                    organizationId: $scope.authentication.user.orgId
+           });
+			$scope.onlyUsers = Users.query(function (result) {
+				//console.log(" $scope.onlyUsers-->", result);
+				var len = result.length;
+				//console.log('length', +len);
+					//$scope.peruser = [];
+					for (var x = 0; x < result.length; x++) {
+						if (result[x].orgId == $scope.authentication.user.orgId)
+							$scope.peruser.push(result[x]);
+					}
+				return $scope.peruser;
+				
+			});
+			
+			$scope.CheckLicenses = Users.query(function (result) {
+				var len = result.length;
+				//console.log('length', +len);
+					$scope.licenseLength = [];
+					for (var x = 0; x <result.length; x++) {
+						if (result[x].orgId == $scope.authentication.user.orgId)
+							$scope.licenseLength.push(result[x]);
+					}
+					
+					if($scope.licenseLength.length > $scope.Admincompany.licenses){
+					  console.log('over');
+					}
+					else
+					{
+					   console.log('not over');
+					}
+					console.log('$scope.licenseLength.length',$scope.licenseLength.length);
+				return $scope.licenseLength.length;
+				
+			});
+			
+			$scope.InvoiceAdmin=[];
+			if($scope.authentication.user.orgId=='54756b6e089822ac1fcd0225'){
+			      $scope.InvoiceAdmin = $scope.onlyUsers;
+			}
+             else{
+			    $scope.InvoiceAdmin = $scope.peruser; 
+			 }			 
+        
+			$scope.filterOptions = {
+				        filterText: ''
+			};
 			$scope.gridOptions = 
 			{
-				data: 'onlyUsers',
+				data: 'InvoiceAdmin',
 				enablePaging: true,
 				showFooter: true,
 			    selectedItems: $scope.mySelections,
@@ -67,12 +96,32 @@ app.controller('AuthenticationController',['$scope','$filter', '$http', '$window
                      		 {field:'firstName', displayName:'First Name'},
                      		 {field: 'lastName', displayName: 'Last Name'},
                      		 {field: 'email', displayName: 'Email'},
-                     		 {field: 'role', displayName: 'Role'}]
+                     		 {field: 'role', displayName: 'Role'}],
+							 filterOptions: $scope.filterOptions
 		};
 	    };
+		
+		//search by first name
+		 $scope.filterName = function() {
+			var filterText = '' + $scope.nameFilter;
+			if (filterText !== '') {
+			  $scope.filterOptions.filterText = filterText;
+			} else {
+			  $scope.filterOptions.filterText = '';
+			}
+		  };
+		  //search by email
+		 /*  $scope.filterEmail = function() {
+			var filterText = 'email:' + $scope.emailFilter;
+			if (filterText !== 'email:') {
+			  $scope.filterOptions.filterText = filterText;
+			} else {
+			  $scope.filterOptions.filterText = '';
+			}
+		  };*/
 		//if ($scope.authentication.user) $location.path('/accounts/create');
 		
-		$scope.signup = function() {
+		/*$scope.signup = function() {
 		     
 		  $scope.credentials.role = $scope.credentials.newrole._id;
 		  $scope.credentials.companyName = $scope.credentials.newcompany._id;
@@ -131,7 +180,7 @@ app.controller('AuthenticationController',['$scope','$filter', '$http', '$window
 				}
 				
 			}
-		};
+		};*/
 			
 		
 		$scope.signupforUser = function() 
