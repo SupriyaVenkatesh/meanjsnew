@@ -40,6 +40,7 @@ app.controller('AuthenticationController',['$scope','$filter', '$http', '$window
 			$scope.Admincompany = Organizations.get({
                     organizationId: $scope.authentication.user.orgId
            });
+		   console.log('$scope.Admincompany--->',$scope.Admincompany);
 			$scope.onlyUsers = Users.query(function (result) {
 				//console.log(" $scope.onlyUsers-->", result);
 				var len = result.length;
@@ -186,7 +187,12 @@ app.controller('AuthenticationController',['$scope','$filter', '$http', '$window
 		$scope.signupforUser = function() 
 		{
 	      $scope.credentials.role = $scope.credentials.newrole._id;
+		  if($scope.authentication.user.orgId == '54756b6e089822ac1fcd0225'){
+		      $scope.credentials.orgId = $scope.credentials.company._id;
+		  }
+		  else{
 		  $scope.credentials.orgId = $scope.Admincompany._id;
+		  }
 		  $scope.credentials.displayName = $scope.credentials.firstName + $scope.credentials.lastName;
 		  $scope.credentials.username = $scope.credentials.firstName + $scope.credentials.lastName;
 		  $scope.credentials.password = $scope.credentials.firstName + $scope.credentials.lastName;
