@@ -5,10 +5,16 @@ app.controller('HeaderController', ['$scope', 'Authentication', 'Menus','sharedP
 		$scope.authentication = Authentication;
 		$scope.isCollapsed = false;
 		$scope.AllCompanies = Organizations.query(); 
+		if(typeof $scope.authentication.user.orgId =="undefined"){
+		console.log('if');
+		$scope.organization=[];
+		$scope.organization.name = 'Invoiceit';
+		}
+		   else{
 			$scope.organization = Organizations.get({ 
 				organizationId: $scope.authentication.user.orgId
 			});
-				//console.log('$scope.organization1  = ' , $scope.organization  );
+			}
         $scope.orgname = $scope.organization.name +'_logo.png';
 		//console.log(' $scope.orgname  = ' ,  $scope.orgname  );
 		 /*angular.forEach( $scope.AllCompanies,function(value,index){
