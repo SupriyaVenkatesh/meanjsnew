@@ -4,12 +4,16 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-	Schema = mongoose.Schema;
+	Schema = mongoose.Schema,
+    customFields = require('mongoose-custom-fields');
 
 /**
  * Account Schema
  */
 var AccountSchema = new Schema({
+     _id: {
+		type: String
+	},
 	firstName__C: {
 		type: String,
 		default: '',
@@ -55,5 +59,22 @@ var AccountSchema = new Schema({
 		ref: 'User'
 	}
 });
+/**
+ * counters Schema
+ */
+var counterSchema = new Schema({
+  _id: {
+		type: String
+	},
+   next: { 
+      type: Number
+     }
+});
 
+counterSchema.statics.findAndModify = function (query, sort, doc, options, callback) {
+  return this.collection.findAndModify(query, sort, doc, options, callback);
+};
+
+mongoose.model('Counter', counterSchema);
+//AccountSchema.plugin(customFields);
 mongoose.model('Account', AccountSchema);

@@ -20,6 +20,10 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 			url: '/accountDetailPage',
 			templateUrl: 'modules/accounts/views/account-home.html'
 		}).
+		state('createQuotenew', {
+			url: '/create new quote',
+			templateUrl: 'modules/core/views/createquote.html'
+		}).
 		state('accountDetailPagenew', {
 			url: '/accountDetailPagenew',
 			templateUrl: 'modules/accounts/views/account-home-new.html'

@@ -6,7 +6,7 @@ app.controller('HeaderController', ['$scope', 'Authentication', 'Menus','sharedP
 		$scope.isCollapsed = false;
 		$scope.AllCompanies = Organizations.query(); 
 		if(typeof $scope.authentication.user.orgId =="undefined"){
-		console.log('if');
+		//console.log('if');
 		$scope.organization=[];
 		$scope.organization.name = 'Invoiceit';
 		}

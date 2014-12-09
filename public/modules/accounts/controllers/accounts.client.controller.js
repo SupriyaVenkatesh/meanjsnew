@@ -1,8 +1,8 @@
 'use strict';
 
 // Accounts controller
-angular.module('accounts').controller('AccountsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Accounts','$http',
-	function($scope, $stateParams, $location, Authentication, Accounts,$http) {
+angular.module('accounts').controller('AccountsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Accounts','$http','Organizations',
+	function($scope, $stateParams, $location, Authentication, Accounts,$http,Organizations) {
 		
 		$scope.authentication = Authentication;
 		$scope.myData = [];
@@ -100,14 +100,50 @@ angular.module('accounts').controller('AccountsController', ['$scope', '$statePa
                      		 {field: 'date__C', displayName: 'Date'},
                      		 {field: 'country__c', displayName: 'Country'}]
 			};
-				
+		
+		
+		$scope.generateId = function() {
+		$scope.AllCompanies = Organizations.query(); 
+			$scope.organization = Organizations.get({ 
+				organizationId: $scope.authentication.user.orgId
+			});
+		 //console.log('$scope.organization',$scope.organization);
+		$scope.httpresponse = $http({
+		            method: 'POST',
+					url: '/generateId',
+				headers: {'Content-Type': 'multipart/form-data'},
+				data: { name :'userid'},
+					 transformRequest: function (data, headersGetter) {
+							var formData = new FormData();
+							angular.forEach(data, function (value, key) {
+								formData.append(key, value);
+								//console.log('key---->'+ key);
+								//console.log('value',value);
+							});
+							var headers = headersGetter();
+							delete headers['Content-Type'];
+							return formData;
+						}
+			}).
+			success(function(data, status, headers, config) {
+			     console.log('data--->',data);
+				$scope.create(data);
+			  }).
+			  error(function(data, status, headers, config) {
+			       console.log('id is failed');
+			  });
+		
+		console.log(' $scope.httpresponse--->', $scope.httpresponse);
+			};
 		
 		// Create new Account
-		$scope.create = function() {
-			
+		$scope.create = function(data) {
+	 console.log('$scope.organization create--->',$scope.organization);
 			if(angular.isUndefined(this.id__C)){
 		    // Create new Account object
 			var account = new Accounts ({
+			 
+			    _id: this.company__C +'Acc0'+ data.next,
 				firstName__C: this.firstName__C,
 				lastName__C: this.lastName__C,
 				company__C: this.company__C,
@@ -116,23 +152,26 @@ angular.module('accounts').controller('AccountsController', ['$scope', '$statePa
 				date__C: this.date__C,
 				country__c: this.country__c
 			});
-
+               console.log('account--->',account);
 			// Redirect after save
 			account.$save(function(response) {
 				//Clear form fields
 				$scope.firstName__C = '';
+				$scope.id__C = '';
 				$scope.lastName__C = '';
 				$scope.company__C = '';
 				$scope.phone__C = '';
 				$scope.address__C = '';
 				$scope.date__C = '';
 				$scope.country__c = '';
-				$scope.myData = Accounts.query();
+			    $scope.myData = Accounts.query();
 			}, function(errorResponse) {
+			 console.log('account is not created');
 				$scope.error = errorResponse.data.message;
 			});
 
-			}else{
+			}
+			else{
 
 				var account = new Accounts ({
 					firstName__C: this.firstName__C,
