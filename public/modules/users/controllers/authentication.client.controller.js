@@ -186,6 +186,7 @@ app.controller('AuthenticationController',['$scope','$filter', '$http', '$window
 		
 		$scope.signupforUser = function() 
 		{
+		    $scope.Reloadvalue=false;
 	      $scope.credentials.role = $scope.credentials.newrole._id;
 		  if($scope.authentication.user.orgId == '54756b6e089822ac1fcd0225'){
 		      $scope.credentials.orgId = $scope.credentials.company._id;
@@ -208,7 +209,8 @@ app.controller('AuthenticationController',['$scope','$filter', '$http', '$window
 			     }).error(function(response){
 					    		
 				    });
-				$scope.credentials ='';		
+				$scope.credentials ='';	
+                  $scope.Reloadvalue= true;		
 				}).error(function(response) {
 					$scope.error = response.message;
 			}); 

@@ -96,10 +96,10 @@ exports.postImage = function(req, res) {
 		console.log('got file named ' + name);
      });
 	 	var folderName = fields.name;
-		mkpath('public/modules/users/img/'+ folderName, function (err) {
+		/*mkpath('public/modules/users/img/'+ folderName, function (err) {
 			if (err) throw err;
 			console.log('Directory structure is created');
-		});
+		});*/
 		
 		//console.log('files.file[0] : ' ,files.file[0]);
 		//console.log('files.file[1] : ' ,files.file[1]);
@@ -115,7 +115,7 @@ exports.postImage = function(req, res) {
         var extension = (extIndex < 0) ? '' : tmpPath.substr(extIndex);
         // uuid is for generating unique filenames. 
         var fileName = folderName+ '_logo' + extension;
-		var destPath = 'public/modules/users/img/'+ folderName+ '/' + fileName;
+		var destPath = 'public/modules/users/img/'+ fileName;
 		console.log('destPath:' + destPath);
         // Server side file type checker.
         if (contentType !== 'image/png' && contentType !== 'image/jpeg') {
