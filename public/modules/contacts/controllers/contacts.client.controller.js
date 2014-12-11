@@ -1,12 +1,13 @@
 'use strict';
 
 // Contacts controller
-angular.module('contacts').controller('ContactsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Contacts',
-	function($scope, $stateParams, $location, Authentication, Contacts ) {
+angular.module('contacts').controller('ContactsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Contacts','$http',
+	function($scope, $stateParams, $location, Authentication, Contacts,$http ) {
 		$scope.authentication = Authentication;
 		$scope.myData = [];
 		$scope.myData = Contacts.query();
 		$scope.mySelections = [];
+		$scope.perContact =[];
 		$scope.date__C = new Date();
 		$scope.filterOptions = {
 			filterText: "",
@@ -84,8 +85,23 @@ angular.module('contacts').controller('ContactsController', ['$scope', '$statePa
 				}
 			}, true);
 			
+			
+			$scope.onlyContacts = Contacts.query(function (result) {
+			console.log('result ==',result);
+				var len = result.length;
+				console.log('length', +len);
+					//$scope.peruser = [];
+					for (var x = 0; x < result.length; x++) {
+						if (result[x].user._id == $scope.authentication.user._id)
+							$scope.perContact.push(result[x]);
+					}
+					console.log('$scope.perContact ==',$scope.perContact);
+				return $scope.perContact;
+				
+			});
+			
 			$scope.gridOptions = {
-				data: 'myData',
+				data: 'perContact',
 				enablePaging: true,
 				showFooter: true,
 				totalServerItems: 'totalServerItems',
@@ -112,7 +128,7 @@ angular.module('contacts').controller('ContactsController', ['$scope', '$statePa
 					company__C: this.company__C,
 					phone__C: this.phone__C,
 					address__C: this.address__C,
-					date__C: this.date__C,
+					//date__C: this.date__C,
 					country__c: this.country__c
 				});
 

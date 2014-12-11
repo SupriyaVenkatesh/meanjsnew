@@ -8,6 +8,7 @@ angular.module('accounts').controller('AccountsController', ['$scope', '$statePa
 		$scope.myData = [];
 		$scope.myData = Accounts.query();
 		$scope.mySelections = [];
+		$scope.perAccount=[];
 		$scope.date__C = new Date();
 		$scope.filterOptions = {
 			filterText: "",
@@ -83,8 +84,23 @@ angular.module('accounts').controller('AccountsController', ['$scope', '$statePa
 				}
 			}, true);
 			
+			$scope.onlyAccounts = Accounts.query(function (result) {
+			console.log('result ==',result);
+				var len = result.length;
+				console.log('length', +len);
+					//$scope.peruser = [];
+					for (var x = 0; x < result.length; x++) {
+						if (result[x].user._id == $scope.authentication.user._id)
+							$scope.perAccount.push(result[x]);
+					}
+					console.log('$scope.perAccount ==',$scope.perAccount);
+				return $scope.perAccount;
+				
+			});
+			
+			
 			$scope.gridOptions = {
-				data: 'myData',
+				data: 'perAccount',
 				enablePaging: true,
 				showFooter: true,
 				totalServerItems: 'totalServerItems',
@@ -143,7 +159,7 @@ angular.module('accounts').controller('AccountsController', ['$scope', '$statePa
 		    // Create new Account object
 			var account = new Accounts ({
 			 
-			    _id: this.company__C +'Acc0'+ data.next,
+			   // _id: this.company__C +'Acc0'+ data.next,
 				firstName__C: this.firstName__C,
 				lastName__C: this.lastName__C,
 				company__C: this.company__C,
@@ -162,7 +178,7 @@ angular.module('accounts').controller('AccountsController', ['$scope', '$statePa
 				$scope.company__C = '';
 				$scope.phone__C = '';
 				$scope.address__C = '';
-				$scope.date__C = '';
+				//$scope.date__C = '';
 				$scope.country__c = '';
 			    $scope.myData = Accounts.query();
 			}, function(errorResponse) {

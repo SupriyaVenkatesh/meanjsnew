@@ -1,4 +1,4 @@
-<div data-ng-controller="AccountsController" id="main" class="container-fluid" style="width:119%;margin-left:-10%;margin-top:1%" data-ng-show="authentication.user">
+<div data-ng-controller="AccountsController" id="main" class="container-fluid" style="width:119%;margin-left:-10%;margin-top:1%" data-ng-show="authentication.user"  data-ng-init="userAccounts()" >
 	<!--Start Breadcrumb-->
 		<div class="row" style="width:86%;float:right;">
 			<div id="breadcrumb" class="col-xs-12">
@@ -70,7 +70,7 @@
 							</div>
 							<div class="box-content">
 								<h4 class="page-header">New Account</h4>
-								<form class="form-horizontal" role="form" data-ng-submit="generateId()" novalidate>
+								<form class="form-horizontal" role="form" data-ng-submit="create()" novalidate>
 									<div class="form-group">
 									<!--input type="hidden" data-ng-model="id__C" id="id__C" class="form-control" data-placement="bottom"/-->
 										<label class="col-sm-2 control-label">First name</label>
@@ -149,7 +149,7 @@
 				</div>
 				</div>
 				
-				<div class="page-header" style="height:150%;">
+				<div class="page-header" style="height:100%;">
 					<h1>List of Accounts</h1>
 					<div class="gridStyle" ng-grid="gridOptions" data-ng-click="findOnebyId();" style="height:300%;">
 						<div style="margin-left:50%;"class="btn btn-primary" data-ng-click="findOnebyIdtoEdit();">

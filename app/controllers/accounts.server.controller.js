@@ -4,45 +4,15 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-     customFields = require('mongoose-custom-fields'),
 	errorHandler = require('./errors'),
-	 multiparty = require('multiparty'),
 	Account = mongoose.model('Account'),
-	Counter = mongoose.model('Counter'),
-    db =  mongoose.connection.db,
 	_ = require('lodash');
 
-	
-	//to incermentnext values
-	exports.getNextSequence = function(req, res) {
-	console.log('req',req);
-	var form = new multiparty.Form();
-	form.parse(req, function(err, fields, files) {
-				var name = fields.name;
-				console.log('name----> ' + name);
-			    Counter.findAndModify({ _id:'userid'}, [], { $inc: { next: 1 } }, {}, function (err,response) {
-						  if (err) throw err;						
-						  console.log('updated',response);
-						    res.jsonp(response);
-						});
-  });
-  };
-	/**
+/**
  * Create a Account
  */
 exports.create = function(req, res) {
-/* var a = new Counter;
-	 a._id= "userid";
-	 a.seq = 0;
-		a.save(function (err, a) {
-		if (err) throw err; 
-		console.error('counter is saved');
-		//res.jsonp(a);
-});*/
-
 	var account = new Account(req.body);
-	//account.add({ name: 'string', color: 'string', price: 'number' });
-	//account.customField('comments', false);
 	account.user = req.user;
 
 	account.save(function(err) {
@@ -73,7 +43,6 @@ exports.update = function(req, res) {
 
 	account.save(function(err) {
 		if (err) {
-		console.log('came to update');
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});

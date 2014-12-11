@@ -1,4 +1,4 @@
-<div data-ng-controller="AccountsController" id="main" class="container-fluid" style="width:119%;margin-left:-10%;margin-top:1%" data-ng-show="authentication.user">
+<div data-ng-controller="AccountsController" id="main" class="container-fluid" style="width:119%;margin-left:-10%;margin-top:1%" data-ng-show="authentication.user"  data-ng-init="userAccounts()" >
 	<!--Start Breadcrumb-->
 		<div class="row" style="width:86%;float:right;">
 			<div id="breadcrumb" class="col-xs-12">
@@ -131,7 +131,7 @@
 				
 				<div class="page-header" style="height:100%;">
 					<h1>List of Accounts</h1>
-					<div class="gridStyle" ng-grid="gridOptions" data-ng-click="findOnebyId();">
+					<div class="gridStyle" ng-grid="gridOptions" data-ng-click="findOnebyId();"  style="height:300%;">
 						<div style="margin-left:50%;"class="btn btn-primary" data-ng-click="findOnebyIdtoEdit();">
 							<i class="glyphicon glyphicon-edit"></i>
 						</div>
