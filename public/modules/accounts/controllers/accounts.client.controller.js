@@ -180,7 +180,7 @@ angular.module('accounts').controller('AccountsController', ['$scope', '$statePa
 				$scope.address__C = '';
 				//$scope.date__C = '';
 				$scope.country__c = '';
-			    $scope.myData = Accounts.query();
+			    //$scope.myData = Accounts.query();
 			}, function(errorResponse) {
 			 console.log('account is not created');
 				$scope.error = errorResponse.data.message;
