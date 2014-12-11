@@ -4,8 +4,23 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
+   validate = require('mongoose-validator'),
 	Schema = mongoose.Schema;
 
+
+var nameValidator = [
+	  validate({
+		validator: 'isLength',
+		arguments: [3, 50],
+		message: 'Name should be between 3 and 50 characters'
+	  }),
+	  validate({
+		validator: 'isAlphanumeric',
+		passIfEmpty: true,
+		message: 'Name should contain alpha-numeric characters only'
+	  })
+];
+	
 /**
  * Account Schema
  */
@@ -14,7 +29,8 @@ var AccountSchema = new Schema({
 		type: String,
 		default: '',
 		required: 'Please fill Account First name',
-		trim: true
+		trim: true,
+		validate: nameValidator
 	},
 	lastName__C: {
 		type: String,

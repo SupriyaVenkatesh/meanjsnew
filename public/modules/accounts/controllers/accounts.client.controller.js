@@ -184,6 +184,8 @@ angular.module('accounts').controller('AccountsController', ['$scope', '$statePa
 			}, function(errorResponse) {
 			 console.log('account is not created');
 				$scope.error = errorResponse.data.message;
+				 console.log('$scope.error---',$scope.error.length);
+				 alert($scope.error);
 			});
 
 			}
