@@ -2,7 +2,7 @@
 
 module.exports = {
 	app: {
-		title: 'InoviceIt',
+		title: 'InvoiceIT',
 		description: 'Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js',
 		keywords: 'MongoDB, Express, AngularJS, Node.js'
 	},
@@ -14,6 +14,7 @@ module.exports = {
 		lib: {
 			css: [
 				'public/lib/bootstrap/dist/css/bootstrap.css',
+				'public/lib/bootstrap/dist/css/bootstrap.min.css',
 				'public/lib/bootstrap/dist/css/bootstrap-theme.css',
 				'public/lib/ng-grid/ng-grid.min.css'
 			],
@@ -30,6 +31,7 @@ module.exports = {
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
 				'public/lib/jquery/dist/jquery.min.js',
 				'public/lib/ng-grid/ng-grid-2.0.13.min.js',
+				'public/lib/angular-money-directive/angular-money-directive.js',
 				'public/lib/ng-file-upload/angular-file-upload.js',
 				'public/lib/ng-file-upload/angular-file-upload-shim.min.js',
 				'public/lib/angular-route/angular-route.js',

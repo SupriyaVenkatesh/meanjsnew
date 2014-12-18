@@ -12,12 +12,12 @@ var nameValidator = [
 	  validate({
 		validator: 'isLength',
 		arguments: [3, 50],
-		message: 'Name should be between 3 and 50 characters'
+		message: 'Account Name should be between 3 and 50 characters'
 	  }),
 	  validate({
 		validator: 'isAlphanumeric',
 		passIfEmpty: true,
-		message: 'Name should contain alpha-numeric characters only'
+		message: 'Account Name should contain alpha-numeric characters only'
 	  })
 ];
 	
@@ -25,20 +25,20 @@ var nameValidator = [
  * Account Schema
  */
 var AccountSchema = new Schema({
-	firstName__C: {
+     accountOwner__C: {
 		type: String,
 		default: '',
 		required: 'Please fill Account First name',
 		trim: true,
-		validate: nameValidator
 	},
-	lastName__C: {
+	accountName__C: {
 		type: String,
 		default: '',
-		required: 'Please fill Account Last name',
-		trim: true
+		required: 'Please fill Account Name',
+		trim: true,
+		validate: nameValidator
 	},
-	company__C: {
+	rating__C: {
 		type: String,
 		default: '',
 		trim: true
@@ -48,20 +48,77 @@ var AccountSchema = new Schema({
 		default: '',
 		trim: true
 	},
-	address__C: {
+	pAccount__C: {
 		type: String,
 		default: '',
 		trim: true
 	},
-	date__C: {
-		type: Date,
-		default: Date.now
-	},
-	country__c: {
+	fax__C: {
 		type: String,
 		default: '',
 		trim: true
 	},
+	accountNumber__C: {
+		type: String,
+		default: '',
+		trim: true
+	},
+	website__C: {
+		type: String,
+		default: '',
+		trim: true
+	},
+	accountSite__C: {
+		type: String,
+		default: '',
+		trim: true
+	},
+	type__C: {
+		type: String,
+		default: '',
+		trim: true
+	},
+	annualRevenue__C: {
+		type: Number,
+		default: '',
+		trim: true
+	},
+	ownership__C: {
+		type: String,
+		default: '',
+		trim: true
+	},
+	employees__C: {
+		type: Number,
+		default: '',
+		trim: true
+	},
+	industry__C: {
+		type: String,
+		default: '',
+		trim: true
+	},
+	Baddress: { 
+	   Country_C: String, 
+	   Street_C: String,
+	   City_C: String,
+	   State_C: String,
+	   ZipCode_C: String
+     },
+	Saddress: { 
+	   Country_C: String, 
+	   Street_C: String,
+	   City_C: String,
+	   State_C: String,
+	   ZipCode_C: String
+     },
+	
+	Description_C: {
+		type: String,
+		default: '',
+		trim: true
+	},
+	
 	created: {
 		type: Date,
 		default: Date.now

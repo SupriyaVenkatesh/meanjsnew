@@ -385,7 +385,7 @@ a.show-sidebar:hover {
   overflow: hidden;
 }
 .full-content .box-content {
-  height: 100%;
+
   position: absolute;
   width: 100%;
   left: 0;
@@ -430,7 +430,8 @@ a.show-sidebar:hover {
 }
 .sidebar-show #content.col-xs-12 {
   opacity: 1;
-  width: 83.33333333333334%;
+  width: 100%;
+  height: 100%;
 }
 .expanded {
   overflow-y:scroll;
@@ -647,7 +648,7 @@ ul.DTTT_dropdown.dropdown-menu > li:hover > a {
 }
 .box-content .form-group, .devoops-modal-inner .form-group {
   margin-top:15px;
-  margin-bottom:15px;
+  margin-bottom:0px;
 }
 .show-grid [class^="col-"] {
   padding-top: 10px;
@@ -1297,8 +1298,8 @@ td.beauty-hover {
   color: #000;
 }
 .form-control {
-  height: 26px;
-  padding: 2px 12px;
+  height: 16px;
+  padding: 2px 6px;
 }
 .input-lg {
   height:39px;
@@ -1409,17 +1410,18 @@ td.beauty-hover {
   line-height: 26px;
 }
 .form-horizontal .radio, .form-horizontal .checkbox, .form-horizontal .radio-inline, .form-horizontal .checkbox-inline {
-  min-height: inherit;
+  
   padding-top: 0;
 }
 .form-horizontal .control-label {
   padding-top: 4px;
+  height: 26px;
 }
 .input-group-addon {
   padding: 0px 6px;
 }
 .form-group .form-control, .form-group .input-group {
-  margin-bottom: 5px;
+  margin-bottom: 2px;
 }
 .input-group .form-control {
   margin:0;
@@ -1927,7 +1929,7 @@ td.beauty-hover {
   top: 60px;
   left: -20px;
   color: #d8d8d8;
-  font-size: 18px;
+  font-size: 8px;
   box-shadow: 0 0 10px #d8d8d8;
   padding: 0px 5px;
 }
@@ -2363,5 +2365,47 @@ td.beauty-hover {
 .gridStyle {
     border: 1px solid rgb(212,212,212);
     min-width: 100%; 
-    height: 300px;
+   min-height: 100%;
+}
+.search-bar {
+    height: 29px;
+    background-color: #e1e1e1;
+    -moz-border-radius: 100px;
+    -webkit-border-radius: 100px;
+    border-radius: 100px;
+	position:relative;
+    width:230px
+    }
+
+.search-bar .searchbutton {
+    position:absolute;
+	top:3%;
+	right:25px;
+    }
+.modal {
+  display: block; 
+}
+
+a {
+  cursor: pointer;
+}
+
+#input_container {
+    position:relative;
+    padding:0px;
+    margin:0;
+  
+}
+#input {
+    height:30px;
+	width:325px;
+    margin:0;
+    padding-left: 5px;
+}
+#input_img {
+  
+    bottom:8px;
+    left:10px;
+    width:10px;
+    height:20px;
 }

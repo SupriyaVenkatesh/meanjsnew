@@ -6,6 +6,7 @@ module.exports = {
 	assets: {
 		lib: {
 			css: [
+			    'public/lib/bootstrap/dist/css/bootstrap.css',
 				'public/lib/bootstrap/dist/css/bootstrap.min.css',
 				'public/lib/bootstrap/dist/css/bootstrap-theme.min.css',
 				'public/lib/ng-grid/ng-grid.min.css'
@@ -22,6 +23,7 @@ module.exports = {
 				'public/lib/angular-ui-utils/ui-utils.min.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.min.js',
 				'public/lib/jquery/dist/jquery.min.js',
+				'public/lib/angular-money-directive/angular-money-directive.js',
 				'public/lib/ng-grid/ng-grid-2.0.13.min.js',
 				'public/lib/ng-file-upload/angular-file-upload.js',
 				'public/lib/ng-file-upload/angular-file-upload-shim.min.js',

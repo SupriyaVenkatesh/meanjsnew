@@ -4,7 +4,7 @@ module.exports = {
 
 	db: 'mongodb://invoiceit:abcabc1234@dogen.mongohq.com:10072/app31971599',
 	app: {
-		title: 'InoviceIt - Development Environment'
+		title: 'InvoiceIT - Development Environment'
 	},
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || 'APP_ID',
