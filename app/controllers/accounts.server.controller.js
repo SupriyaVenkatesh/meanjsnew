@@ -5,6 +5,7 @@
  */
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors'),
+    metawidget = require( 'metawidget' ),
 	Account = mongoose.model('Account'),
 	_ = require('lodash');
 

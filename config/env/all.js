@@ -16,14 +16,18 @@ module.exports = {
 				'public/lib/bootstrap/dist/css/bootstrap.css',
 				'public/lib/bootstrap/dist/css/bootstrap.min.css',
 				'public/lib/bootstrap/dist/css/bootstrap-theme.css',
-				'public/lib/ng-grid/ng-grid.min.css'
+				'public/lib/ng-grid/ng-grid.min.css',
+				'public/modules/accounts/css/overrides/jQueryUI.css'
 			],
 			js: [
 
 				'public/lib/angular/angular.js',
+				'public/lib/angular/angulardynamicform.js',
 				'public/lib/angular-resource/angular-resource.js', 
 				'public/lib/angular-cookies/angular-cookies.js', 
 				'public/lib/angular-animate/angular-animate.js', 
+				'public/lib/metawidget/metawidget-core.min.js', 
+				'public/lib/metawidget/metawidget-angular.min.js', 
 				'public/lib/angular-touch/angular-touch.js', 
 				'public/lib/angular-sanitize/angular-sanitize.js', 
 				'public/lib/angular-ui-router/release/angular-ui-router.js',

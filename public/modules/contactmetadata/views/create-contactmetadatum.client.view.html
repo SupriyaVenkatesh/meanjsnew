@@ -1,0 +1,122 @@
+<div data-ng-controller="ContactmetadataController" id="main" class="container-fluid" style="width:119%;margin-left:-10%;margin-top:1%" >
+	<!--Start Breadcrumb-->
+		<div class="row" style="width:86%;float:right;">
+			<div id="breadcrumb" class="col-xs-12">
+				<a href="#" class="show-sidebar">
+					<i class="fa fa-bars"></i>
+				</a>
+				<ol class="breadcrumb pull-left">
+					<li><a href="/#!/adminindexpage">Home</a></li>
+					<li><a href="/#!/contactDetailPage">Contacts</a></li>
+				</ol>
+			</div>
+		</div>
+		<!--End Breadcrumb-->
+	<div class="row" style="min-height:100%;">
+		<div id="sidebar-left" class="col-xs-2 col-sm-2">
+			<ul class="nav main-menu">
+			    <li>
+					 <a class="ajax-link" href="/#!/adminindexpage">
+						 <span class="hidden-xs">Home</span>
+					 </a>
+				</li>
+								<li class="dropdown">
+					<a href="#" class="dropdown-toggle">
+						<i class="fa fa-bar-chart-o"></i>
+						<span class="hidden-xs">Manage</span>
+					</a>
+					<ul class="dropdown-menu">
+				<li>
+					 <a class="ajax-link" href="/#!/adminCreateUser">
+						 <span class="hidden-xs">Create User</span>
+					 </a>
+				</li>
+				<li>
+					 <a class="ajax-link" href="/#!/uploadImageAdmin">
+						 <span class="hidden-xs">Upload Logo</span>
+					 </a>
+				</li>
+				<li>
+					 <a class="ajax-link" href="/#!/accountDetailPagenew">
+						 <span class="hidden-xs">Accounts</span>
+					 </a>
+				</li>
+				<li>
+					 <a class="ajax-link" href="/#!/contactDetailPagenew">
+						 
+						 <span class="hidden-xs">Contacts</span>
+					</a>
+				</li>
+				<li>
+					 <a class="ajax-link" href="/#!/createContactmetadatum">
+						 
+						 <span class="hidden-xs">Add Field in Contacts</span>
+					</a>
+				</li>
+				</ul>
+				</li>
+				</ul> 
+	  </div>
+	  
+		<!--Start Content-->
+			<div id="content" class="col-xs-12 col-sm-10" style="margin-top:-1.5%;">
+			<div class="preloader">
+			
+			<section >
+			<div class="page-header">
+					<h1>Create Field</h1>
+					<div class="row">
+					<div class="col-xs-12 col-sm-12">
+						<div class="box">
+							<div class="box-header">
+								
+							<div class="no-move"></div>
+							</div>
+							<div class="box-content">
+								<h4 class="page-header">New Field</h4>
+								<form class="form-horizontal" role="form" data-ng-submit="create()" novalidate>
+								<fieldset>
+								
+								    <label class="col-sm-2 control-label">Label name</label>
+										<div class="col-sm-4">
+											<input type="text" data-ng-model="caption" id="caption"  name="caption" class="form-control" placeholder="Label Name"  data-placement="bottom" >
+										</div>
+									<label class="col-sm-2 control-label">type</label>
+										<div class="col-sm-4">
+											<select id="s2_with_tag"  data-ng-model="type" class="populate placeholder">
+												
+											 <option value="">--Select--</option>
+												<option>string</option>
+												<option>date</option>
+												<option>select</option>
+												<option>integer</option>					
+											</select>
+										</div>			
+				                     <div class="clearfix"></div>
+									<div class="form-group">
+										<div class="col-sm-offset-5 col-sm-1">
+											<button type="submit" class="btn btn-primary btn-label-left"  >
+												save
+											</button>
+										</div>
+										
+									</div>
+									
+									</div>
+									<div data-ng-show="error" class="text-center text-danger">
+					            <strong data-ng-bind="error"></strong>
+				                  </div>
+		                     	</fieldset>
+								</form>
+							</div>
+						</div>
+				</div>
+				</div>
+		     </section>
+			</div>
+		</div>
+		<!--End Content -->
+	</div>
+</div>
+</div>
+

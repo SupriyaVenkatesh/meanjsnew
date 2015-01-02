@@ -5,8 +5,11 @@
  */
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors'),
+	  metawidget = require( 'metawidget' ),
 	Contact = mongoose.model('Contact'),
 	_ = require('lodash');
+
+
 
 /**
  * Create a Contact

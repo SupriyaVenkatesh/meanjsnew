@@ -13,7 +13,6 @@
 		</div>
 		<!--End Breadcrumb-->
 	<div class="row" style="min-height:100%;">
-	  
 	  <div id="sidebar-left" class="col-xs-2 col-sm-2">
 			<ul class="nav main-menu">
 			    <li>
@@ -148,9 +147,10 @@
 									
 									
 									<div class="form-group">
-										<label class="col-sm-2 control-label">Employees</label>
+										<label class="col-sm-2 control-label"  >Employees</label>
 										<div class="col-sm-4">
-											  <input type="number" data-ng-model="employees__C" id="employees__C" class="form-control" placeholder="Employees Number" data-placement="bottom" >
+											  <input type="number" data-ng-model="employees__C" id="employees__C" class="form-control"  placeholder="Employees Number" data-placement="bottom" >
+											
 										</div>
 										<label class="col-sm-2 control-label">Industry</label>
 											<div class="col-sm-4">
@@ -169,7 +169,12 @@
 												<option>Other</option>
 											</select>
 										</div>
+										
+										<div class='container-fluid' >
+									   <input type="text" ng-model="selected11" typeahead="state for state in states | filter:$viewValue">
+									    </div>
 									</div>
+									
 									<br></br>
 									<h4 class="page-header">Address information</h4>
 									 <a ng-click='copyBaddressToSaddress()' href='' >Copy Billing Address to Shipping Address </a>
@@ -215,7 +220,7 @@
 										</div> 
 										<label class="col-sm-2 control-label">Shipping Street</label>
 										<div class="col-sm-4">
-											<input type="text" data-ng-model="Saddress.Street_C" id="Saddress.Street_C" class="form-control" data-placement="bottom" >
+											<input  type="text" data-ng-model="Saddress.Street_C" id="Saddress.Street_C" class="form-control" data-placement="bottom" >
 										</div>
 									</div>
 									

@@ -40,6 +40,10 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 			url: '/adminsingupPage',
 			templateUrl: 'modules/organizations/views/admin-login.html'
 		}).
+		state('createContactmetadatum', {
+			url: '/createContactmetadatum',
+			templateUrl: 'modules/contactmetadata/views/create-contactmetadatum.client.view.html'
+		}).
 		state('superadminindexpage', {
 			url: '/superadminindexpage',
 			templateUrl: 'modules/core/views/superadminindexpage.html'

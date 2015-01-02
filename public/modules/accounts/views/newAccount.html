@@ -1,4 +1,4 @@
-<div data-ng-controller="AccountsController" id="main" class="container-fluid" style="width:119%;margin-left:-10%;margin-top:1%" data-ng-show="authentication.user"  data-ng-init="userAccounts()" >
+<div data-ng-controller="ContactsController" id="main" class="container-fluid" style="width:119%;margin-left:-10%;margin-top:1%" data-ng-show="authentication.user">
 	<!--Start Breadcrumb-->
 		<div class="row" style="width:86%;float:right;">
 			<div id="breadcrumb" class="col-xs-12">
@@ -6,8 +6,8 @@
 					<i class="fa fa-bars"></i>
 				</a>
 				<ol class="breadcrumb pull-left">
-					<li><a href="/#!/adminindexpage">Home</a></li>
-					<li><a href="/#!/accountDetailPagenew">Accounts</a></li>
+					<li><a href="/#!/userhome">Home</a></li>
+					<li><a href="/#!/contactDetailPage">Contacts</a></li>
 				</ol>
 			</div>
 		</div>
@@ -16,47 +16,21 @@
 		<div id="sidebar-left" class="col-xs-2 col-sm-2">
 			<ul class="nav main-menu">
 			    <li>
-					 <a class="ajax-link" href="/#!/adminindexpage">
+					 <a class="ajax-link" href="/#!/userhome">
 						 <span class="hidden-xs">Home</span>
 					 </a>
 				</li>
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle">
-						<i class="fa fa-bar-chart-o"></i>
-						<span class="hidden-xs">Manage</span>
-					</a>
-					<ul class="dropdown-menu">
 				<li>
-					 <a class="ajax-link" href="/#!/adminCreateUser">
-						 <span class="hidden-xs">Create User</span>
-					 </a>
-				</li>
-				<li>
-					 <a class="ajax-link" href="/#!/uploadImageAdmin">
-						 <span class="hidden-xs">Upload Logo</span>
-					 </a>
-				</li>
-				<li>
-					 <a class="ajax-link" href="/#!/accountDetailPagenew">
+					 <a class="ajax-link" href="/#!/accountDetailPage">
 						 <span class="hidden-xs">Accounts</span>
 					 </a>
 				</li>
 				<li>
-					 <a class="ajax-link" href="/#!/contactDetailPagenew">
+					 <a class="ajax-link" href="/#!/contactDetailPage">
 						 
 						 <span class="hidden-xs">Contacts</span>
 					</a>
 				</li>
-				<li>
-					 <a class="ajax-link" href="/#!/createContactmetadatum">
-						 
-						 <span class="hidden-xs">Add Field in Contacts</span>
-					</a>
-				</li>
-				</ul>
-				</li>
-				
-				
 			</ul> 
 	  </div>
 	  
@@ -66,7 +40,7 @@
 			
 			<section >
 			<div class="page-header">
-					<h1>Add Account</h1>
+					<h1>Add Contact</h1>
 					<div class="row">
 					<div class="col-xs-12 col-sm-12">
 						<div class="box">
@@ -75,14 +49,14 @@
 							<div class="no-move"></div>
 							</div>
 							<div class="box-content">
-								<h4 class="page-header">New Account</h4>
+								<h4 class="page-header">New Contact</h4>
 								<form class="form-horizontal" role="form" data-ng-submit="create()" novalidate>
 									<div class="form-group">
-									<!--input type="hidden" data-ng-model="id__C" id="id__C" class="form-control" data-placement="bottom"/-->
+									<input type="hidden" data-ng-model="id__C" id="id__C" class="form-control" data-placement="bottom"/>
 										<label class="col-sm-2 control-label">First name</label>
 										<div class="col-sm-4">
 											<input type="text" data-ng-model="firstName__C" id="firstName__C" class="form-control" placeholder="First name"  data-placement="bottom" >
-										</div>	
+										</div>
 										<label class="col-sm-2 control-label">Last name</label>
 										<div class="col-sm-4">
 											<input type="text" data-ng-model="lastName__C" id="lastName__C" class="form-control" placeholder="Last name"  data-placement="bottom" >
@@ -134,9 +108,12 @@
 												
 											</select>
 										</div>
+										<!--div class="col-sm-4">
+											<input type="text" data-ng-model="account__c" id="account__c" class="form-control" >
+										</div-->
 										
 									</div>
-									 <div ng-show="error.length > 0">{{error}}</div>
+									
 									<div class="clearfix"></div>
 									<div class="form-group">
 										<div class="col-sm-offset-5 col-sm-1">
@@ -156,7 +133,7 @@
 				</div>
 				
 				<div class="page-header" style="height:100%;">
-					<h1>List of Accounts</h1>
+					<h1>List of Contacts</h1>
 					<div class="gridStyle" ng-grid="gridOptions" data-ng-click="findOnebyId();" style="height:300%;">
 						<div style="margin-left:50%;"class="btn btn-primary" data-ng-click="findOnebyIdtoEdit();">
 							<i class="glyphicon glyphicon-edit"></i>
@@ -166,7 +143,6 @@
 						</div>
 					</div>
 				</div>
-				
 		     </section>
 			</div>
 		</div>

@@ -68,6 +68,56 @@ String.prototype.splice = function(idx, rem, s) {
 };
 */
 
+/*angular.module('accounts').directive('hideon', function() {
+    return function(scope, element, attrs) {
+        scope.$watch(attrs.hideon, function(value, oldValue) {
+            if(value) {
+                element.hide();
+            } else {
+                element.show();
+            }
+        }, true);
+    }
+});*/
+
+angular.module('accounts', []).directive('autoComplete', function($rootScope, locationAutoCompleteService, $timeout, $http, programLocationModel) {
+    return {
+        restrict: 'A',
+        scope: {
+            serviceType: '@serviceType'
+        },
+        link: function(scope, elem, attr, ctrl) {
+            var autoItem = [];
+            scope.change = function() {
+                locationAutoCompleteService.unSubscribe();
+                var service = locationAutoCompleteService.getServiceDefinition();
+                service.filters.pattern = scope.inputVal;
+               return  locationAutoCompleteService.subscribe();
+            };
+            scope.$on('myData', function(event, message) {
+                if (message !== null && message.results !== null) {
+                    autoItem = [];
+                    for (var i = 0; i < message.results.length; i++) {
+                        autoItem.push({
+                            label: message.results[i].name,
+                            id: message.results[i].id
+                        });
+                    }
+                    elem.autocomplete({
+                        source: autoItem,
+                        select: function(event, ui) {
+                            $timeout(function() {
+                                elem.trigger('input');
+                            }, 0);
+                        }
+                    });
+                }
+            });
+        }
+    };
+});
+
+
 // Accounts controller
 angular.module('accounts', ['fiestah.money']).controller('AccountsController', ['$scope','$modal', '$log' ,'$stateParams', '$location', 'Authentication', 'Accounts', '$http', 'Organizations',
     function($scope, $modal, $log,$stateParams, $location, Authentication, Accounts, $http, Organizations) {
@@ -78,7 +128,11 @@ angular.module('accounts', ['fiestah.money']).controller('AccountsController', [
         $scope.myData = Accounts.query();
         $scope.mySelections = [];
        $scope.items = [];
+	   $scope.selected11 = undefined;
+	   //$scope.states=Accounts.query();
+       $scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
 	    $scope.selected='';
+		 $scope.toggle = false;
         $scope.shouldBeDisabled = true;
         $scope.accountOwner__C = $scope.authentication.user.displayName;
        // console.log('$scope.authentication.user ==', $scope.authentication.user);

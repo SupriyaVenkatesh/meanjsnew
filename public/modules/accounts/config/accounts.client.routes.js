@@ -13,6 +13,10 @@ angular.module('accounts').config(['$stateProvider',
 			url: '/accounts/create',
 			templateUrl: 'modules/accounts/views/create-account.client.view.html'
 		}).
+		state('newAccount', {
+			url: '/accounts/createnew',
+			templateUrl: 'modules/accounts/views/newAccount.html'
+		}).
 		state('viewAccount', {
 			url: '/accounts/:accountId',
 			templateUrl: 'modules/accounts/views/view-account.client.view.html'

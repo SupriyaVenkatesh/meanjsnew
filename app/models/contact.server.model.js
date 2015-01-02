@@ -19,7 +19,6 @@ var ContactSchema = new Schema({
 	lastName__C: {
 		type: String,
 		default: '',
-		required: 'Please fill Account Last name',
 		trim: true
 	},
 	company__C: {

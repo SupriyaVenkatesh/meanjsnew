@@ -47,6 +47,12 @@
 						 <span class="hidden-xs">Contacts</span>
 					</a>
 				</li>
+				<li>
+					 <a class="ajax-link" href="/#!/createContactmetadatum">
+						 
+						 <span class="hidden-xs">Add Field in Contacts</span>
+					</a>
+				</li>
 				</ul>
 				</li>
 				</ul> 
@@ -58,7 +64,7 @@
 			
 			<section >
 			<div class="page-header">
-					<h1>Add Contact</h1>
+					<h1>New Contact</h1>
 					<div class="row">
 					<div class="col-xs-12 col-sm-12">
 						<div class="box">
@@ -67,84 +73,60 @@
 							<div class="no-move"></div>
 							</div>
 							<div class="box-content">
-								<h4 class="page-header">New Contact</h4>
-								<form class="form-horizontal" role="form" data-ng-submit="create()" novalidate>
-									<div class="form-group">
-									<input type="hidden" data-ng-model="id__C" id="id__C" class="form-control" data-placement="bottom"/>
-										<label class="col-sm-2 control-label">First name</label>
-										<div class="col-sm-4">
-											<input type="text" data-ng-model="firstName__C" id="firstName__C" class="form-control" placeholder="First name"  data-placement="bottom" >
-										</div>
-										<label class="col-sm-2 control-label">Last name</label>
-										<div class="col-sm-4">
-											<input type="text" data-ng-model="lastName__C" id="lastName__C" class="form-control" placeholder="Last name"  data-placement="bottom" >
-										</div>
-										
-									</div>
+								<h4 class="page-header">Contact Information</h4>
+							<dynamic-table-form fields="basicSection" data="data" class="form-horizontal">
+                               
+								  <input dynamic-field-type="string" ng-model="value" type="text"  >
+
+								  <input dynamic-field-type="date" ng-model="value" type="date" >
+
+								  <ul dynamic-field-type="array">
+									<li dynamic-field-child>
+									  <ng-transclude></ng-transclude>
+									  <button ng-click="removeChild(childKey)">Remove</button>
+									</li>
+									<button ng-click="addChild()">Add Another</button>
+								  </ul>
+
+								  <select dynamic-field-type="select" ng-model="value"
+										  ng-options="option.value as option.caption for option in config.options"></select>
+
+								  <input dynamic-field-type="integer" ng-model="value" type="number" size="{{config.maxLength}}" maxlength="{{config.maxLength}}" min="{{config.minValue}}" max="{{config.maxValue}}" >
+                                     <button ng-click="create()">Save</button>
 									
-									<div class="form-group">
-										<label class="col-sm-2 control-label">Company</label>
-										<div class="col-sm-4">
-											<input type="text" data-ng-model="company__C" id="company__C" class="form-control" placeholder="Company name"  data-placement="bottom" >
-										</div>
-										<label class="col-sm-2 control-label">Phone</label>
-										<div class="col-sm-4">
-											<input type="text" data-ng-model="phone__C" id="phone__C" class="form-control" placeholder="Phone Number" data-placement="bottom" >
-										</div>
-									</div>
-									
-									<div class="form-group">
-										<label class="col-sm-2 control-label">Address</label>
-										<div class="col-sm-4">
-											<input type="text" data-ng-model="address__C" id="address__C" class="form-control" placeholder="Address"  data-placement="bottom" >
-										</div>
-										<label class="col-sm-2 control-label">Date</label>
-										<div class="col-sm-4">
-											<input type="date" datepicker-popup="{{format}}" data-ng-model="date__C" id="date__C" class="form-control is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
-										    <span class="input-group-btn">
-												<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar glyphicon-nonescaped "></i></button>
-											  </span>
-										</div>
-									</div>
-									
-									
-									<div class="form-group">
-										<label class="col-sm-2 control-label">Country</label>
-										<div class="col-sm-4">
-											<select id="s2_with_tag"  data-ng-model="country__c" class="populate placeholder">
-												
-												<option selected>--None--</option>
-												<option>Australia</option>
-												<option>Brazil</option>
-												<option>Canada</option>
-												<option>England</option>
-												<option>India</option>
-												<option>japan</option>
-												<option>Malaysia</option>
-												<option>Singapore</option>
-												<option>South Africa</option>
-												
-											</select>
-										</div>
-										<!--div class="col-sm-4">
-											<input type="text" data-ng-model="account__c" id="account__c" class="form-control" >
-										</div-->
-										
-									</div>
-									
-									<div class="clearfix"></div>
-									<div class="form-group">
-										<div class="col-sm-offset-5 col-sm-1">
-											<button type="submit" class="btn btn-primary btn-label-left">
+							</dynamic-table-form>
+							<br></br>
+							<br></br>
+							<h4 class="page-header">Address Information</h4>
+							<dynamic-table-form fields="workSection" data="data" class="form-horizontal">
+      
+								  <input dynamic-field-type="string" ng-model="value" type="text" maxlength="{{config.maxLength}}" size="{{config.maxLength}}">
+
+								  <input dynamic-field-type="date" ng-model="value" type="date">
+
+								  <ul dynamic-field-type="array">
+									<li dynamic-field-child>
+									  <ng-transclude></ng-transclude>
+									  <button ng-click="removeChild(childKey)">Remove</button>
+									</li>
+									<button ng-click="addChild()">Add Another</button>
+								  </ul>
+
+								  <select dynamic-field-type="select" ng-model="value"
+										  ng-options="option.value as option.caption for option in config.options"></select>
+
+								  <input dynamic-field-type="integer" ng-model="value" type="number" size="{{config.maxLength}}" maxlength="{{config.maxLength}}" min="{{config.minValue}}" max="{{config.maxValue}}">
+                                     <button ng-click="create()">Save</button>
+							</dynamic-table-form>
+		                      <br></br>
+							  <div class="form-group">
+										<div class="col-sm-offset-4 col-sm-0">
+											<button type="submit" ng-click="create()" class="btn btn-primary btn-label-left"  >
 												save
 											</button>
-										</div>
-										
-									</div>
-									
-									</div>
-									
-								</form>
+										</div>	
+								</div> 
+						</div>
 							</div>
 						</div>
 				</div>

@@ -1,19 +1,62 @@
 'use strict';
 
+angular.module('contacts', []).directive('autoComplete', function($rootScope, locationAutoCompleteService, $timeout, $http, programLocationModel) {
+    return {
+        restrict: 'A',
+        scope: {
+            serviceType: '@serviceType'
+        },
+        link: function(scope, elem, attr, ctrl) {
+            var autoItem = [];
+            scope.change = function() {
+                locationAutoCompleteService.unSubscribe();
+                var service = locationAutoCompleteService.getServiceDefinition();
+                service.filters.pattern = scope.inputVal;
+                return locationAutoCompleteService.subscribe();
+            };
+            scope.$on('myData', function(event, message) {
+                if (message !== null && message.results !== null) {
+                    autoItem = [];
+                    for (var i = 0; i < message.results.length; i++) {
+                        autoItem.push({
+                            label: message.results[i].name,
+                            id: message.results[i].id
+                        });
+                    }
+                    elem.autocomplete({
+                        source: autoItem,
+                        select: function(event, ui) {
+                            $timeout(function() {
+                                elem.trigger('input');
+                            }, 0);
+                        }
+                    });
+                }
+            });
+        }
+    };
+});
+
 // Contacts controller
-angular.module('contacts').controller('ContactsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Contacts','$http',
-	function($scope, $stateParams, $location, Authentication, Contacts,$http ) {
+angular.module('contacts', [ 'metawidget', 'dynamic-form' ]).controller('ContactsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Contacts','$http','Contactmetadata',
+	function($scope, $stateParams, $location, Authentication, Contacts,$http,Contactmetadata ) {
 		$scope.authentication = Authentication;
 		$scope.myData = [];
 		$scope.myData = Contacts.query();
+		$scope.selected11 = undefined;
+        $scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
 		$scope.mySelections = [];
 		$scope.perContact =[];
+		$scope.basicSection =[];
+		$scope.workSection =[];
+		$scope.addSection =[];
+		$scope.desSection=[];
 		$scope.date__C = new Date();
 		$scope.filterOptions = {
 			filterText: "",
 			useExternalFilter: true
 		}; 
-			
+       $scope.data = {};
 		$scope.totalServerItems = 0;
 		$scope.pagingOptions = {
 			pageSizes: [250, 500, 1000],
@@ -87,16 +130,47 @@ angular.module('contacts').controller('ContactsController', ['$scope', '$statePa
 			
 			
 			$scope.onlyContacts = Contacts.query(function (result) {
-			console.log('result ==',result);
+			//console.log('result ==',result);
 				var len = result.length;
-				console.log('length', +len);
+				//console.log('length', +len);
 					//$scope.peruser = [];
 					for (var x = 0; x < result.length; x++) {
 						if (result[x].user._id == $scope.authentication.user._id)
 							$scope.perContact.push(result[x]);
 					}
-					console.log('$scope.perContact ==',$scope.perContact);
+					//console.log('$scope.perContact ==',$scope.perContact);
 				return $scope.perContact;
+				
+			});
+			
+			
+			
+		//section-wise form				
+			$scope.fields = Contactmetadata.query(function (result) {
+			  //console.log('result ==',result);
+				var len = result.length;
+				//console.log('length', +len);
+					//$scope.peruser = [];
+					for (var x = 0; x < result.length; x++) {
+					       if(result[x].orgId == $scope.authentication.user.orgId || (result[x].orgId =='54756b6e089822ac1fcd0225')){  
+						if (result[x].section =='Basic')
+							$scope.basicSection.push(result[x]);
+
+						else if (result[x].section =='Work')
+						  $scope.workSection.push(result[x]);
+						  
+						  else if(result[x].section =='add')
+						   $scope.addSection.push(result[x]);
+						   
+						   else
+						    $scope.desSection.push(result[x]);
+						   
+						  
+						  
+						 }
+					}
+					//console.log('$scope.workSection ==',$scope.workSection);
+				return [$scope.basicSection,$scope.workSection];
 				
 			});
 			
@@ -118,12 +192,43 @@ angular.module('contacts').controller('ContactsController', ['$scope', '$statePa
                      		 {field: 'country__c', displayName: 'Country'}]
 			};
 
+			/*metawidget configuration
+			$scope.metawidgetConfig = {
+                        inspector: function() {
+                            return {
+                                properties: {
+                                    label1: {
+                                        type: 'string'
+                                    },
+                                    label2: {
+                                        type: 'string'
+                                       
+                                    }
+                                }
+                            }
+				}
+			}
+			layout: new metawidget.layout.HeadingTagLayoutDecorator(
+		    new metawidget.layout.TableLayout( { numberOfColumns: 2 } ))
+         
+                    $scope.saveTo = {
+                        label1: 'value1',
+                        label2: 'value2'
+                    }
+
+                    $scope.save = function() {
+                        console.log( $scope.saveTo );
+                    }
+			*/
+			
 		// Create new Contact
 		$scope.create = function() {
+		console.log('came inside create function');
+		console.log('$scope.fields==', $scope.fields);
 			if(angular.isUndefined(this.id__C)){
 				// Create new Contact object
 				var contact = new Contacts ({
-					firstName__C: this.firstName__C,
+					firstName__C: $scope.data.firstName__C,
 					lastName__C: this.lastName__C,
 					company__C: this.company__C,
 					phone__C: this.phone__C,
@@ -131,9 +236,9 @@ angular.module('contacts').controller('ContactsController', ['$scope', '$statePa
 					//date__C: this.date__C,
 					country__c: this.country__c
 				});
-
+				
 				// Redirect after save
-				contact.$save(function(response) {
+				contact1.$save(function(response) {
 					// Clear form fields
 					$scope.firstName__C = '';
 					$scope.lastName__C = '';
@@ -142,7 +247,7 @@ angular.module('contacts').controller('ContactsController', ['$scope', '$statePa
 					$scope.address__C = '';
 					$scope.date__C = '';
 					$scope.country__c = '';
-					$scope.myData = Contacts.query();
+					//$scope.myData = Contacts.query();
 				}, function(errorResponse) {
 					$scope.error = errorResponse.data.message;
 				});
@@ -233,3 +338,4 @@ angular.module('contacts').controller('ContactsController', ['$scope', '$statePa
 		}
 	}
 ]);
+
